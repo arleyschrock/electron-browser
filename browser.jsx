@@ -7,7 +7,7 @@ var urllib = require('url')
 
 function createPageObject (location) {
   return {
-    location: location||'https://github.com/pfraze/electron-browser',
+    location: location||'https://start.me',
     statusText: false,
     title: 'new tab',
     isLoading: false,
