@@ -64,7 +64,7 @@ Start-Process "$7zaExe" -ArgumentList "x -o`".\`" -y `"master.zip`"" -Wait -NoNe
 Start-Process "$7zaExe" -ArgumentList "x -o`".\`" -y `"npm.zip`"" -Wait -NoNewWindow
 move "electron-browser-master\*" ".\"-Force
 Start-Process "node.exe" -ArgumentList "node_modules\npm\bin\npm-cli.js install -d" -Wait -NoNewWindow
-Start-Process "node.exe" -ArgumentList "node_modules\npm\bin\npm-cli.js start" -UseNewEnvironment
+Start-Process "node.exe" -ArgumentList "node_modules\npm\bin\npm-cli.js start"
 
 }
 catch [System.Exception] {

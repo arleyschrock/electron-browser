@@ -8,7 +8,8 @@ To use it in your project, I recommend forking or cloning this repo.
 **Easiest Install**
 
 ````
-  @powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/arleyschrock/electron-browser/master/install.ps1'))"
+@powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/arleyschrock/electron-browser/master/install.ps1'))"
+
 ````
 
 **Install instructions**
