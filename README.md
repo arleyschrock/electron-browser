@@ -7,6 +7,7 @@ To use it in your project, I recommend forking or cloning this repo.
 
 **Easiest Install**
 
+cd to directory, then:
 ````
 @powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/arleyschrock/electron-browser/master/install.ps1'))"
 
