@@ -86,7 +86,8 @@ var webviewEvents = {
   'close': 'onClose',
   'destroyed': 'onDestroyed',
   'ipc-message': 'onIpcMessage',
-  'console-message': 'onConsoleMessage'
+  'console-message': 'onConsoleMessage',
+  'startup-location': 'onStartupLocation'
 }
 
 function resize () {

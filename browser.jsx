@@ -1,8 +1,11 @@
 'use strict'
-var remote = require('remote')
-var Menu = remote.require('menu')
-var MenuItem = remote.require('menu-item')
-var clipboard = require('clipboard')
+
+const electron = require('electron')
+const remote = electron.remote;
+const Menu = electron.Menu;
+const MenuItem = electron.MenuItem;
+const clipboard = electron.clipboard;
+
 var urllib = require('url')
 
 function createPageObject (location) {
@@ -237,6 +240,9 @@ var BrowserChrome = React.createClass({
     },
     onContextMenu: function (e, page, pageIndex) {
       this.getWebView(pageIndex).send('get-contextmenu-data', { x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY })
+    },
+    onStartupLocation: function(e){
+      alert(e.args[0]);
     },
     onIpcMessage: function (e, page) {
       if (e.channel == 'status') {
