@@ -2,15 +2,18 @@
 
 const electron = require('electron')
 const remote = electron.remote;
-const Menu = electron.Menu;
-const MenuItem = electron.MenuItem;
+const Menu = remote.Menu;
+const MenuItem = remote.MenuItem;
 const clipboard = electron.clipboard;
+const ipc = electron.ipcRenderer;
 
 var urllib = require('url')
 
 function createPageObject (location) {
+  var answer = ipc.sendSync('get-startup-location');
+  console.log('Answer: '+answer||'')
   return {
-    location: location||'https://start.me',
+    location: location||answer||'https://www.bing.com',
     statusText: false,
     title: 'new tab',
     isLoading: false,
@@ -22,7 +25,9 @@ function createPageObject (location) {
 }
 
 var BrowserChrome = React.createClass({
+  
   getInitialState: function () {
+    var test = ipc.send('get-startup-location');
     return {
       pages: [createPageObject()],
       currentPageIndex: 0
@@ -187,11 +192,11 @@ var BrowserChrome = React.createClass({
       this.getWebView().reload()
     },
     onClickBundles: function () {
-      var location = urllib.parse(this.getWebView().getUrl()).path
+      var location = urllib.parse(this.getWebView().getURL()).path
       this.getPage().navigateTo('/bundles/view.html#'+location)
     },
     onClickVersions: function () {
-      var location = urllib.parse(this.getWebView().getUrl()).path
+      var location = urllib.parse(this.getWebView().getURL()).path
       this.getPage().navigateTo('/bundles/versions.html#'+location)
     },
     onClickSync: console.log.bind(console, 'sync'),
@@ -224,7 +229,7 @@ var BrowserChrome = React.createClass({
       // update state
       var webview = this.getWebView(pageIndex)
       page.statusText = false
-      page.location = webview.getUrl()
+      page.location = webview.getURL()
       page.canGoBack = webview.canGoBack()
       page.canGoForward = webview.canGoForward()
       if (!page.title)
@@ -235,16 +240,18 @@ var BrowserChrome = React.createClass({
     onPageTitleSet: function (e) {
       var page = this.getPageObject()
       page.title = e.title
-      page.location = this.getWebView().getUrl()
+      page.location = this.getWebView().getURL()
       this.setState(this.state)
     },
     onContextMenu: function (e, page, pageIndex) {
-      this.getWebView(pageIndex).send('get-contextmenu-data', { x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY })
+ipc.send('get-contextmenu-data', { x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY })
     },
     onStartupLocation: function(e){
-      alert(e.args[0]);
+      this.startupLocation = e.args[0];
+      alert(this.startupLocation);
     },
     onIpcMessage: function (e, page) {
+      alert(e.channel);
       if (e.channel == 'status') {
         page.statusText = e.args[0]
         this.setState(this.state)

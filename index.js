@@ -7,11 +7,11 @@ var mainWindow = null
 const argv = process.argv;
 const startupLocation = argv[argv.length -1]
 const browserPath = path.join( __dirname, 'browser.html')
-console.log(browserPath)
 
-ipc.on('get-startup-location', function(ev){
-  ev.sender.send('startup-location',startupLocation)
+ipc.on('get-startup-location', function(event){
+  event.returnValue = startupLocation
 });
+
 app.on('window-all-closed', function() {
   if (process.platform != 'darwin') {
     app.quit()

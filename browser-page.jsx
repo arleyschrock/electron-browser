@@ -68,6 +68,8 @@ var BrowserPage = React.createClass({
 
 function webviewHandler (self, fnName) {
   return function (e) {
+    console.log(self);
+    console.log(e);
     if (self.props[fnName])
       self.props[fnName](e, self.props.page, self.props.pageIndex)
   }
