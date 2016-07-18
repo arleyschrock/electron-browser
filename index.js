@@ -5,7 +5,8 @@ const ipc = electron.ipcMain
 const path = require('path')
 var mainWindow = null
 const argv = process.argv;
-const startupLocation = argv[argv.length -1]
+var startupLocation = argv[argv.length -1]
+startupLocation = startupLocation &&startupLocation.indexOf("://")!=-1?startupLocation:"https://bing.com"
 const browserPath = path.join( __dirname, 'browser.html')
 
 ipc.on('get-startup-location', function(event){

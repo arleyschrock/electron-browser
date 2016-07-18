@@ -65,6 +65,10 @@ Start-Process "$7zaExe" -ArgumentList "x -o`".\`" -y `"npm.zip`"" -Wait -NoNewWi
 move "electron-browser-master\*" ".\"-Force
 Start-Process "node.exe" -ArgumentList "node_modules\npm\bin\npm-cli.js install -d" -Wait -NoNewWindow
 Start-Process "node.exe" -ArgumentList "node_modules\npm\bin\npm-cli.js start"
+# $WshShell = New-Object -comObject WScript.Shell
+# $Shortcut = $WshShell.CreateShortcut("$Home\Desktop\ColorPix.lnk")
+# $Shortcut.TargetPath = "C:\Program Files (x86)\ColorPix\ColorPix.exe"
+# $Shortcut.Save()
 
 }
 catch [System.Exception] {
