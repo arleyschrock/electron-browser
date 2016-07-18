@@ -11,7 +11,6 @@ var urllib = require('url')
 
 function createPageObject (location) {
   var answer = ipc.sendSync('get-startup-location');
-  console.log('Answer: '+answer||'')
   return {
     location: location||answer||'https://www.bing.com',
     statusText: false,
@@ -248,10 +247,8 @@ ipc.send('get-contextmenu-data', { x: e.nativeEvent.offsetX, y: e.nativeEvent.of
     },
     onStartupLocation: function(e){
       this.startupLocation = e.args[0];
-      alert(this.startupLocation);
     },
     onIpcMessage: function (e, page) {
-      alert(e.channel);
       if (e.channel == 'status') {
         page.statusText = e.args[0]
         this.setState(this.state)
